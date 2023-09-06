@@ -3,16 +3,13 @@ if length(ARGS) < 3
     exit()
 end
 
-using Distributed, ClusterManagers, Pkg
-using Simulations
+using Distributed, ClusterManagers
 
-ntasks = ARGS[1]   
+ntasks = parse(Int, ARGS[1])
 mem_per_cpu = ARGS[2]
 time = ARGS[3]
 
-Pkg.precompile()
-
-addprocs(SlurmManager(parse(Int, ntasks)),
+addprocs(SlurmManager(ntasks),
          exeflags = "--project=../../.",
 	 topology = :master_worker,
          job_name = "study1",
@@ -24,14 +21,13 @@ addprocs(SlurmManager(parse(Int, ntasks)),
          mem_per_cpu = mem_per_cpu)
 
 @everywhere begin
-    using Simulations
     using Pkg
-    
-    Pkg.instantiate()
-    Pkg.precompile()
+    Pkg.add("Simulations")
 end
 
-study1(n_is = 5000)
+using Simulations
+
+study1(n_is = 5000, M = 4)
 
 for worker in workers()
     rmprocs(worker)
