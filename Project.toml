@@ -1,0 +1,11 @@
+name = "article_lik"
+uuid = "9935efc3-09d0-4c8e-aa19-c3d9d686690b"
+authors = ["pspat "]
+version = "0.1.0"
+
+[deps]
+JLSO = "9da8a3cd-07a3-59c0-a743-3fdc52c30d11"
+Moosh = "99b31415-443e-43a2-8bf4-ca532bb4a161"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
+RandomNumbers = "e6cf234a-135c-5ec9-84dd-332b85af5143"
+Simulations = "778192d3-ef18-4ce5-814b-6356444560f1"
