@@ -20,14 +20,9 @@ addprocs(SlurmManager(ntasks),
          ntasks = ntasks,
          mem_per_cpu = mem_per_cpu)
 
-@everywhere begin
-    using Pkg
-    Pkg.add("Simulations")
-end
+@everywhere using Simulations
 
-using Simulations
-
-study1(n_is = 5000, M = 4)
+study1(n_is = 5000)
 
 for worker in workers()
     rmprocs(worker)
